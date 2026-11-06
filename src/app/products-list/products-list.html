@@ -1,0 +1,75 @@
+<section class="catalog">
+    <header class="catalog-header">
+        <div class="header-titles">
+            <p class="eyebrow">SMARTPHONE COLLECTION</p>
+            <h1>Каталог телефонів</h1>
+            <p class="subtitle">Обери свій новий смартфон</p>
+        </div>
+
+        <div class="header-controls">
+            <div class="filter">
+                <label for="brand">Бренд:</label>
+                <select id="brand" [value]="selectedBrand()" (change)="onBrandChange($any($event.target).value)">
+                    @for (brand of brands(); track brand) {
+                    <option [value]="brand">{{ brand }}</option>
+                    }
+                </select>
+            </div>
+
+            <a class="add-button" [routerLink]="['/products/new']">
+                <span>+</span> Додати товар
+            </a>
+        </div>
+    </header>
+
+    @if (loading()) {
+    <div class="state-container">
+        <p class="message">Завантаження товарів...</p>
+    </div>
+    }
+
+    @if (error()) {
+    <div class="state-container">
+        <p class="error">{{ error() }}</p>
+        <button class="retry-button" (click)="loadProducts()">Спробувати ще раз</button>
+    </div>
+    }
+
+    @if (!loading() && !error()) {
+    @if (paginatedProducts().length > 0) {
+    <div class="product-grid">
+        @for (product of paginatedProducts(); track product.id) {
+        <article class="product-card">
+            <a class="product-image" [routerLink]="['/products', product.id]">
+                <img [src]="product.thumbnail" [alt]="product.title" loading="lazy" />
+            </a>
+
+            <div class="product-info">
+                <span class="category">{{ product.brand || 'Smartphone' }}</span>
+                <h2>{{ product.title }}</h2>
+                <p class="description">{{ product.description }}</p>
+
+                <div class="product-footer">
+                    <span class="price">${{ product.price }}</span>
+                    <div class="card-actions">
+                        <a class="btn btn-primary" [routerLink]="['/products', product.id]">Деталі</a>
+                        <a class="btn btn-secondary" [routerLink]="['/products', product.id, 'edit']">Редагувати</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        }
+    </div>
+
+    <div class="pagination">
+        <button (click)="changePage(currentPage() - 1)" [disabled]="currentPage() === 1">← Назад</button>
+        <span class="page-info">Сторінка {{ currentPage() }} з {{ totalPages() }}</span>
+        <button (click)="changePage(currentPage() + 1)" [disabled]="currentPage() >= totalPages()">Далі →</button>
+    </div>
+    } @else {
+    <div class="state-container">
+        <p class="message">Товарів цього бренду немає.</p>
+    </div>
+    }
+    }
+</section>

@@ -1,0 +1,96 @@
+<section class="form-container">
+    <header class="form-header">
+        <a routerLink="/products" class="back-link">← Назад до каталогу</a>
+        <h1>{{ isEditMode ? 'Редагувати товар' : 'Додати новий смартфон' }}</h1>
+    </header>
+
+    @if (loading) {
+    <p class="status-message">Завантаження даних товару...</p>
+    }
+
+    @if (!loading) {
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+
+        @if (successMessage) {
+        <div class="alert alert-success">{{ successMessage }}</div>
+        }
+
+        @if (errorMessage) {
+        <div class="alert alert-danger">{{ errorMessage }}</div>
+        }
+
+        <!-- Назва товару -->
+        <div class="form-group">
+            <label for="title">Назва смартфона *</label>
+            <input id="title" type="text" formControlName="title" placeholder="напр. iPhone 15 Pro"
+                [class.invalid]="f['title'].touched && f['title'].invalid" />
+            @if (f['title'].touched && f['title'].errors) {
+            <div class="error-text">
+                @if (f['title'].errors['required']) { <span>Назва обов'язкова</span> }
+                @if (f['title'].errors['minlength']) { <span>Мінімум 3 символи</span> }
+            </div>
+            }
+        </div>
+
+        <!-- Бренд -->
+        <div class="form-group">
+            <label for="brand">Бренд *</label>
+            <input id="brand" type="text" formControlName="brand" placeholder="напр. Apple, Samsung"
+                [class.invalid]="f['brand'].touched && f['brand'].invalid" />
+            @if (f['brand'].touched && f['brand'].errors?.['required']) {
+            <div class="error-text">Вкажіть бренд</div>
+            }
+        </div>
+
+        <!-- Ціна -->
+        <div class="form-group">
+            <label for="price">Ціна ($) *</label>
+            <input id="price" type="number" formControlName="price" placeholder="999"
+                [class.invalid]="f['price'].touched && f['price'].invalid" />
+            @if (f['price'].touched && f['price'].errors) {
+            <div class="error-text">
+                @if (f['price'].errors['required']) { <span>Ціна обов'язкова</span> }
+                @if (f['price'].errors['min']) { <span>Ціна повинна бути більше 0</span> }
+            </div>
+            }
+        </div>
+
+        <!-- URL Зображення -->
+        <div class="form-group">
+            <label for="thumbnail">Посилання на зображення (URL) *</label>
+            <input id="thumbnail" type="text" formControlName="thumbnail" placeholder="https://example.com/image.png"
+                [class.invalid]="f['thumbnail'].touched && f['thumbnail'].invalid" />
+            @if (f['thumbnail'].touched && f['thumbnail'].errors) {
+            <div class="error-text">
+                @if (f['thumbnail'].errors['required']) { <span>URL обов'язковий</span> }
+                @if (f['thumbnail'].errors['pattern']) { <span>Введіть коректний URL (http:// або https://)</span> }
+            </div>
+            }
+        </div>
+
+        <!-- Опис -->
+        <div class="form-group">
+            <label for="description">Опис *</label>
+            <textarea id="description" rows="4" formControlName="description"
+                placeholder="Короткий опис характеристик..."
+                [class.invalid]="f['description'].touched && f['description'].invalid"></textarea>
+            @if (f['description'].touched && f['description'].errors) {
+            <div class="error-text">
+                @if (f['description'].errors['required']) { <span>Опис обов'язковий</span> }
+                @if (f['description'].errors['minlength']) { <span>Опис має містити щонайменше 10 символів</span> }
+            </div>
+            }
+        </div>
+
+        <!-- Кнопки дії -->
+        <div class="form-actions">
+            <button type="button" routerLink="/products" class="btn btn-secondary">Скасувати</button>
+            <button type="submit" [disabled]="submitting" class="btn btn-primary">
+                {{ submitting ? 'Збереження...' : (isEditMode ? 'Зберегти зміни' : 'Створити товар') }}
+            </button>
+        </div>
+
+    </form>
+    }
+</section>
+  

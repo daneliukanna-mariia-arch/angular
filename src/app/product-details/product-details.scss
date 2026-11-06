@@ -1,0 +1,128 @@
+.details-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px;
+
+    .back-link {
+        display: inline-block;
+        margin-bottom: 24px;
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: color 0.2s;
+
+        &:hover {
+            color: #1d4ed8;
+        }
+    }
+}
+
+.details-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+    }
+
+    .image-wrapper {
+        background-color: #f8fafc;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+
+        img {
+            max-width: 100%;
+            max-height: 320px;
+            object-fit: contain;
+        }
+    }
+
+    .details-info {
+        display: flex;
+        flex-direction: column;
+
+        .brand-badge {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2563eb;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #0f172a;
+            margin: 0 0 12px 0;
+        }
+
+        .price {
+            font-size: 26px;
+            font-weight: 800;
+            color: #16a34a;
+            margin: 0 0 16px 0;
+        }
+
+        .description {
+            font-size: 15px;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .actions {
+            margin-top: auto;
+            display: flex;
+            gap: 12px;
+
+            .btn {
+                padding: 10px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+                transition: background-color 0.2s;
+
+                &-edit {
+                    background-color: #2563eb;
+                    color: #ffffff;
+
+                    &:hover {
+                        background-color: #1d4ed8;
+                    }
+                }
+
+                &-secondary {
+                    background-color: #f1f5f9;
+                    color: #334155;
+                    border: 1px solid #cbd5e1;
+
+                    &:hover {
+                        background-color: #e2e8f0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.state-message {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #64748b;
+
+    &.error {
+        color: #ef4444;
+    }
+}

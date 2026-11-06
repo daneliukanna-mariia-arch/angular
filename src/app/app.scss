@@ -1,0 +1,56 @@
+/* Глобальні стилі */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    line-height: 1.5;
+    padding: 20px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 16px 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.nav-links {
+    display: flex;
+    gap: 16px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #64748b;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+    color: #2563eb;
+    background-color: #eff6ff;
+}
+
+.main-content {
+    background-color: #ffffff;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}

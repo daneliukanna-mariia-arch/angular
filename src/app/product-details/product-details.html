@@ -1,0 +1,32 @@
+<div class="details-container">
+    <a routerLink="/products" class="back-link">← Назад до каталогу</a>
+
+    @if (loading()) {
+    <div class="state-message">Завантаження інформації про товар...</div>
+    }
+
+    @if (error()) {
+    <div class="state-message error">{{ error() }}</div>
+    }
+
+    @if (!loading() && product(); as item) {
+    <div class="details-card">
+        <div class="image-wrapper">
+            <img [src]="item.thumbnail" [alt]="item.title" />
+        </div>
+
+        <div class="details-info">
+            <span class="brand-badge">{{ item.brand || 'Smartphone' }}</span>
+            <h1>{{ item.title }}</h1>
+            <p class="price">${{ item.price }}</p>
+            <p class="description">{{ item.description }}</p>
+
+            <div class="actions">
+                <a [routerLink]="['/products', item.id, 'edit']" class="btn btn-edit">Редагувати</a>
+                <a routerLink="/products" class="btn btn-secondary">До каталогу</a>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+  
